@@ -43,6 +43,43 @@ physics.addBody( playerBall, "dynamic", {
 	bounce = 0.2
 	})
 
+local ball1 = display.newCircle( display.contentCenterX, 450, 37)
+ball1.id = "ball1"
+physics.addBody( ball1, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
+
+local ball2 = display.newCircle( 40, 450, 37)
+ball2.id = "player"
+physics.addBody( ball2, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
+local ball3 = display.newCircle( 100, 450, 37)
+ball3.id = "player"
+physics.addBody( ball3, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
+local ball4 = display.newCircle( 160, 450, 37)
+ball4.id = "player"
+physics.addBody( ball4, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
+local ball5 = display.newCircle( 210, 450, 37)
+ball5.id = "player"
+physics.addBody( ball5, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
+local ball6 = display.newCircle( 260, 450, 37)
+ball6.id = "player"
+physics.addBody( ball6, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
 
 local ball7 = display.newCircle( display.contentCenterX, 450, 37)
 ball7.id = "player"
@@ -82,42 +119,57 @@ physics.addBody( ball12, "dynamic", {
 	bounce = 0.2
 	})
 
-local ball1 = display.newCircle( display.contentCenterX, 450, 37)
-ball1.strokeWidth = 0.9
-ball1:setStrokeColor( 0, 0, 0)
-ball1.id = "ball1"
-physics.addBody( ball1, "dynamic", {
+local ball13 = display.newCircle( display.contentCenterX, 450, 37)
+ball13.id = "ball13"
+physics.addBody( ball13, "dynamic", {
 	friction = 0.5,
 	bounce = 0.2
 	})
 
-local ball2 = display.newCircle( 40, 450, 37)
-ball2.id = "player"
-physics.addBody( ball2, "dynamic", {
+local ball14 = display.newCircle( 40, 450, 37)
+ball14.id = "ball14"
+physics.addBody( ball14, "dynamic", {
 	friction = 0.5,
 	bounce = 0.2
 	})
-local ball3 = display.newCircle( 100, 450, 37)
-ball3.id = "player"
-physics.addBody( ball3, "dynamic", {
+local ball15 = display.newCircle( 100, 450, 37)
+ball15.id = "ball15"
+physics.addBody( ball15, "dynamic", {
 	friction = 0.5,
 	bounce = 0.2
 	})
-local ball4 = display.newCircle( 160, 450, 37)
-ball4.id = "player"
-physics.addBody( ball4, "dynamic", {
+
+local balll16 = display.newCircle( 160, 450, 37)
+balll16.id = "ball16"
+physics.addBody( balll16, "dynamic", {
 	friction = 0.5,
 	bounce = 0.2
 	})
-local ball5 = display.newCircle( 210, 450, 37)
-ball5.id = "player"
-physics.addBody( ball5, "dynamic", {
+
+local ball17 = display.newCircle( 210, 450, 37)
+ball17.id = "ball17"
+physics.addBody( ball17, "dynamic", {
 	friction = 0.5,
 	bounce = 0.2
 	})
-local ball6 = display.newCircle( 260, 450, 37)
-ball6.id = "player"
-physics.addBody( ball6, "dynamic", {
+
+local ball18 = display.newCircle( 260, 450, 37)
+ball18.id = "ball18"
+physics.addBody( ball18, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
+
+local ball19 = display.newCircle( 260, 450, 37)
+ball19.id = "ball19"
+physics.addBody( ball19, "dynamic", {
+	friction = 0.5,
+	bounce = 0.2
+	})
+
+local ball20 = display.newCircle( 260, 450, 37)
+ball20.id = "ball20"
+physics.addBody( ball20, "dynamic", {
 	friction = 0.5,
 	bounce = 0.2
 	})
@@ -154,3 +206,4 @@ end
 
 
 playerBall:addEventListener( "touch", playerBall )
+

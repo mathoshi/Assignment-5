@@ -1,232 +1,195 @@
 -----------------------------------------------------------------------------------------
 --
 -- Created by: Matsuru Hoshi
--- Created on: Apr 24, 2016
+-- Created on: May 22, 2019
 --
--- This file contains a game.
+-- This file contains TypeLearner, a game to pratice your keyboard typing.
 -----------------------------------------------------------------------------------------
 
-local physics = require( "physics")
+local background = display.setDefault( "background", 100/255, 100/255, 100/255)
 
-physics.start()
-physics.setGravity( 0, 1)
---physics.setDrawMode("hybrid")
+local title = display.newText( "TypeLearner", display.contentCenterX, 30, "Times", 20)
 
-local background = display.setDefault( "background", 186/255, 239/255, 205/255)
+local keyboard = display.newImageRect( "assets/keyboard.png", 300, 111)
+keyboard.x = display.contentCenterX
+keyboard.y = 240
 
-local music = audio.loadSound( "Bomberman.mp3")
+local nameBox = native.newTextField(display.contentCenterX, 60, 190, 15)
 
-audio.play( music )
+local nameText = display.newText( "", display.contentCenterX, 80, "Times", 10)
 
-local ground = display.newRect( display.contentCenterX, 555, 500, 60)
-ground.id = "ground"
-physics.addBody( ground, "static", {
-	friction = 0.1,
-	bounce = 0.3
-	})
+local intstructionText = display.newText( "Train to type faster. Hit the keys that light up!", display.contentCenterX, 130, "Times", 10)
 
-local leftWall = display.newRect( -50, display.contentCenterY, 100, 560)
-leftWall.id = "left wall"
-physics.addBody( leftWall, "static", {
-	friction = 0.5,
-	bounce = 0.1
-	})
+local enterButon = display.newImageRect( "assets/button.png", 30, 30)
+enterButon.x = 370
+enterButon.y = 60
 
-local rigthWall = display.newRect( 390, display.contentCenterY, 100, 560)
-rigthWall.id = "left wall"
-physics.addBody( rigthWall, "static", {
-	friction = 0.5,
-	bounce = 0.1
-	})
+local startButton = display.newImageRect( "assets/startButton.png", 60, 47)
+startButton.x = display.contentCenterX
+startButton.y = 160
 
-local startButton = display.newRoundedRect( display.contentCenterX, 200, 200, 60, 30) 
+t = {}
 
-local startText = display.newText( "Start", display.contentCenterX, 200, "Phosphate", 50)
-startText:setFillColor( 161/255, 209/255, 177/255)
-startText.align = "center"
+t[1] = {63, 81}
+t[2] = {90, 81}
+t[3] = {106, 81}
+t[4] = {122.5, 81}
+t[5] = {139, 81}
+t[6] = {164, 81}
+t[7] = {180, 81}
+t[8] = {197, 81}
+t[9] = {213, 81}
+t[10] = {238, 81}
+t[11] = {254, 81}
+t[12] = {270, 81}
+t[13] = {287, 81}
+t[14] = {62, 112.5}
+t[15] = {78, 112.5}
+t[16] = {94, 112.5}
+t[17] = {110.5, 112.5}
+t[18] = {126.5, 112.5}
+t[19] = {142.5, 112.5}
+t[20] = {158, 112.5}
+t[21] = {175, 112.5}
+t[22] = {191, 112.4}
+t[23] = {207, 112.5}
+t[24] = {223, 112.5}
+t[25] = {239.5, 112.5}
+t[26] = {255.5, 112.5}
+t[27] = {280, 112.5}
+t[28] = {369, 112.5}
+t[29] = {385, 112.5}
+t[30] = {402, 112.5}
+t[31] = {431, 112.5}
+t[32] = {66, 130}
+t[33] = {87, 130}
+t[34] = {102.5, 130}
+t[35] = {119, 130}
+t[36] = {135, 130}
+t[37] = {151, 130}
+t[38] = {136, 130}
+t[39] = {183, 130}
+t[40] = {199, 130}
+t[40].id = "73"
 
-local instructBox = display.newRoundedRect( display.contentCenterX, 380, 220, 190, 30)
-instructBox:setFillColor( 1, 1, 1)
 
-local instructText = [[Drag your ball from left to right to avoid obstacles]]
 
-local options = {
-	text = instructText,
-	x = display.contentCenterX,
-	y = 380,
-	width = 180,
-	height = 100,
-	font = "Phosphate",
-	fontSize = 20,
-	align = "center"
-}
+print (t[40].id)
+--print( t[2][1])
 
-local instructTextOut = display.newText( options )
-instructTextOut:setFillColor( 161/255, 209/255, 177/255)
+local myTable = { 'a', 'b', 'c', 'd' }
 
-local function createBall()
-	local function gameOver()
-		local blank = display.newRect( 
-			display.contentCenterX, display.contentCenterY,
-			display.actualContentWidth, display.actualContentHeight)
-		blank:setFillColor( 119/255, 26/255, 26/255)
+i = math.random(1, 2)
+print(t[i][1])
+print(t[i][2])
+--print( t[ math.random( #t ) ] )
 
-		local gameOverText = display.newText( "Game Over!", display.contentCenterX, display.contentCenterY, "Phosphate", 50)
-		gameOverText:setFillColor( 0, 0, 0)
+
+-- To check if namePrint() has been called on start()
+local functCheck = 0
+local functCheck2 = 0
+local functCheck3 = 0
+-- To check if start() has been called on
+
+--local function keys( event )
+--	if (event.keyName == "a" or event.keyName == "j") and (event.phase == "down") then
+--		print("Key '".. event.keyName .. "' was pressed " .. event.phase)
+--		return true
+--	end
+--end
+
+local function namePrint( event )
+	if (nameBox.text ~= "") then
+		nameText.text = "Hi, ".. nameBox.text ..". Welcome!"
+		print("Hi")
+		functCheck = functCheck + 1
+		print(functCheck)
+		nameText:setFillColor( 1, 1, 1)
+	else
+		functCheck2 = functCheck2 +1
+		print("write your name")
+		nameText.text = "Write your name."
 	end
+end
+		
+local function createLight()
+	-- local x = table stuff
+	-- local y = table stuff 
+	--x = t[ math.random( t[1][1], t[2][1] ) ] 
+	--y = t[ math.random( t[1][2], t[2][2] ) ] 
+	--print(x)
+	--print(y)
+	--a = "63, 81"
+	--tonumber(a)
+	-- i = math.random(1, 39)
+	-- x = t[i][1]
+	-- y = t[i][2]
+	local light = display.newRoundedRect( 199 , 130, 17, 17, 2)
+	light:setFillColor( 0, 0, 0)
+	light.alpha = 0.5
 
-	local function whiteBallCollision(self, event)
-		if ( event.phase == "began" ) then
-			if (event.other.id == "ground") then
-				display.remove(self)
-			elseif (event.other.id == "player") then
-				gameOver()
+	keyCheck()
+end
+
+local function game()
+	if (functCheck3 >= 1) then
+		createLight()
+	end
+end 
+
+local function keyCheck()
+	local function keys( event )
+		local correct = 0
+		local pressed = 0
+			if ((tostring(event.nativeKeyCode) == t[40].id) and (event.phase == "down")) then
+				correct = correct + 1
+				print("correct : " .. correct)
 			end
-			print("Whiteball is "..self.y.." with "..event.other.id)
+			if (event.phase == "down") then
+				pressed = pressed + 1
+				print("pressed: ".. pressed)
+			end
+			while pressed < 100 do
+				game()
+			end	
 		end
-	end
-
-	local x = math.random(100, display.contentWidth)
-	local y = math.random(-5000, -100)
-	local ball = display.newCircle( x, y, 37)
-	ball.id = "ball"
-	ball.collision = whiteBallCollision
-	ball:addEventListener( "collision")
-	physics.addBody( ball, "dynamic", {
-		friction = 0.5,
-		bounce = 0.2
-	})
+	Runtime:addEventListener( "key", keys)
 end
 
-local function run()
 
-	local playerBall = display.newCircle( display.contentCenterX, 450, 37)
-	playerBall:setFillColor( 0, 234/255, 35/255)
-	playerBall.id = "player"
-	physics.addBody( playerBall, "dynamic", {
-		friction = 0.5,
-		bounce = 0.2
-		})
-
-	for i = 0, 20, 1 do
-		createBall()
-	end
-
-	local rightButton = display.newRoundedRect( 258, 455, 100, 120, 5)
-	rightButton:setFillColor( 0, 0, 0)
-	rightButton.alpha = 0.8
-
-	local leftButton = display.newRoundedRect( 60, 455, 100, 120, 5)
-	leftButton:setFillColor( 0, 0, 0)
-	leftButton.alpha = 0.8
-
-	local rightArrow = display.newImageRect( "assets/rightarrow.png", 111, 109)
-	rightArrow.alpha = 0.4
-	rightArrow.x = 260
-	rightArrow.y = 455
-
-	local leftArrow = display.newImageRect( "assets/leftarrow.png", 111, 109)
-	leftArrow.alpha = 0.4
-	leftArrow.x = 58
-	leftArrow.y = 455
-
-	local function playerCollision( self, event )
-	 
-	    if ( event.phase == "began" ) then
-	        print( self.id .. ": collision began with " .. event.other.id )
-	 
-	    elseif ( event.phase == "ended" ) then
-	        print( self.id .. ": collision ended with " .. event.other.id )
-	    end
-	end 
-
-	function playerBall:touch( event )
-		local playerBallTouched = event.target
-
-	    if ( event.phase == "began" ) then
-	        print( "Touch event began on: " .. self.id )
-	 
-	        -- Set touch focus
-	        display.getCurrentStage():setFocus( self )
-	        self.markX = self.x
-	        self.markY = self.y
-	        self.isFocus = true
-	     
-	    elseif ( self.isFocus ) then
-	        if ( event.phase == "moved" ) then
-	            print( "Moved phase of touch event detected." )
-	            self.x = event.x - event.xStart + self.markX
-	            rightButton.alpha = 0.01
-	        	rightArrow.alpha = 0.01
-	 			leftButton.alpha = 0.01
-	        	leftArrow.alpha = 0.01
-	        elseif ( event.phase == "ended" or event.phase == "cancelled" ) then
-	 
-	            -- Reset touch focus
-	            display.getCurrentStage():setFocus( nil )
-	            self.isFocus = nil
-	            print( "Touch event ended on: " .. self.id )
-	            rightButton.alpha = 0.8
-	    		rightArrow.alpha = 0.8
-	    		leftButton.alpha = 0.8
-	    		leftArrow.alpha = 0.8
-	        end
-	    end
-
-	    return true
-	end
-
-	function rightButton:touch( event )
-	    if ( event.phase == "moved" or event.phase == "began" ) then
-	        -- move the character up
-	        transition.moveBy( playerBall, { 
-	        	x = 5, -- move 5 in the x direction 
-	        	y = 0, -- move up 0 pixels
-	        	time = 1 -- move in a 1/10 of a second
-	        	} )
-	        rightButton.alpha = 0.01
-	        rightArrow.alpha = 0.01
-	    elseif ( event.phase == "ended") then
-	    	rightButton.alpha = 0.8
-	    	rightArrow.alpha = 0.8
-	    end
-
-	    return true
-	end
-
-	function leftButton:touch( event )
-	    if ( event.phase == "moved" or event.phase == "began" ) then
-	        -- move the character up
-	        transition.moveBy( playerBall, { 
-	            x = -5, -- move  in the x direction 
-	            y = 0, -- move up
-	            time = 1 -- move in a 1/10 of a second
-	            } )
-	        leftButton.alpha = 0.01
-	        leftArrow.alpha = 0.01
-	    elseif ( event.phase == "ended") then
-	    	leftButton.alpha = 0.8
-	    	leftArrow.alpha = 0.8
-		end
-
-	    return true
-	end
-
-	rightButton:addEventListener( "touch", rightButton )
-	leftButton:addEventListener( "touch", leftButton )
-	playerBall:addEventListener( "touch", playerBall )
-
-end
 
 local function start( event )
-
-	display.remove(startText)
-	display.remove(startButton)
-	display.remove(instructBox)
-	display.remove(instructTextOut)
-
-	print( 'hi')
-	run()
+	if (functCheck >= 1) then
+		display.remove(startButton)
+		display.remove(enterButon)
+		display.remove(nameBox)
+		display.remove(nameText)
+		display.remove(intstructionText)
+		keyboard.y = 130
+		keyboard.width = 400
+		keyboard.height = 148
+		functCheck3 = functCheck3 + 1
+	elseif (functCheck2 >= 1) then
+		nameText:setFillColor( 1, 0, 0)
+	else 
+		nameText.text = "Write your name."
+		print(functCheck)
+		print(functCheck2)
+	end
+	timer.performWithDelay( 1000, game )
 end
 
+enterButon:addEventListener( "touch", namePrint)
 startButton:addEventListener( "touch", start)
+
+
+-- Called when a key event has been received
+local function onKeyEvent( event )
+    local message = "Key '" .. event.keyName .. "' has key code: " .. tostring( event.nativeKeyCode )
+    print( message )
+    print( event.nativeKeyCode)
+    return false
+end
+ 
+-- Add the key event listener
+Runtime:addEventListener( "key", onKeyEvent )
